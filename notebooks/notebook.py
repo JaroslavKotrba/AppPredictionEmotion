@@ -16,5 +16,14 @@ path = "/Users/HP/OneDrive/Documents/Python Anaconda/Streamlit_NLP_App/AppPredic
 os.chdir(path)
 os.listdir()
 
+# Load
 df = pd.read_csv("emotion_dataset.csv"); df
 df.columns
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import MultinomialNB
+
+
+
+
+

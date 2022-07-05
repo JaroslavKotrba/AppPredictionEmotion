@@ -25,6 +25,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score,classification_report,confusion_matrix
 
+# Text Cleaning Pkgs
+import neattext.functions as nfx
+
 # Load
 df = pd.read_csv("data/emotion_dataset.csv"); df
 
@@ -32,4 +35,9 @@ df = pd.read_csv("data/emotion_dataset.csv"); df
 df['Emotion'].value_counts()
 sns.countplot(x='Emotion', data=df);
 
+# User handels (@#)
+df['Clean_Text'] = df['Text'].apply(nfx.remove_userhandles)
+
+# Stopwords
+df['Clean_Text'] = df['Clean_Text'].apply(nfx.remove_stopwords)
 

@@ -1,7 +1,7 @@
 # STREAMLIT
 
 # conda activate enviro
-# cd "/Users/hp/OneDrive/Documents/Python Anaconda/AppPredictionEmotion"
+# cd "/Users/hp/OneDrive/Documents/Python Anaconda/Streamlit_NLP_App/AppPredictionEmotion"
 
 from multiprocessing import Pipe
 from xml.etree.ElementTree import PI

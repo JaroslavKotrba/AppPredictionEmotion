@@ -41,3 +41,20 @@ df['Clean_Text'] = df['Text'].apply(nfx.remove_userhandles)
 # Stopwords
 df['Clean_Text'] = df['Clean_Text'].apply(nfx.remove_stopwords)
 
+# Special characters
+# df['Clean_Text'] = df['Clean_Text'].apply(nfx.remove_special_characters)
+
+# Feature & labels
+X = df['Clean_Text']; X
+y = df['Emotion']; y
+
+# Splitting
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+
+# Build pipeline
+from sklearn.pipeline import Pipeline
+
+# Model
+
+

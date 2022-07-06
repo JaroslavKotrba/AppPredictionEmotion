@@ -61,5 +61,6 @@ from sklearn.pipeline import Pipeline
 # Model
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
-pipe = Pipeline(steps=[('cv', CountVectorizer()), ('lr', LogisticRegression())])
 
+pipe = Pipeline(steps=[('cv', CountVectorizer()), ('lr', LogisticRegression())])
+pipe.fit(X_train, y_train)

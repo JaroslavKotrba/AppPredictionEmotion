@@ -18,16 +18,6 @@ path = "/Users/HP/OneDrive/Documents/Python Anaconda/Streamlit_NLP_App/AppPredic
 os.chdir(path)
 os.listdir()
 
-# Estimators
-from sklearn.naive_bayes import MultinomialNB
-
-# Transformers
-from sklearn.metrics import accuracy_score,classification_report,confusion_matrix
-
-
-
-
-
 # Load
 df = pd.read_csv("data/emotion_dataset.csv"); df
 
@@ -64,3 +54,12 @@ from sklearn.linear_model import LogisticRegression
 
 pipe = Pipeline(steps=[('cv', CountVectorizer()), ('lr', LogisticRegression())])
 pipe.fit(X_train, y_train)
+
+# Accuracy
+from sklearn.metrics import accuracy_score,classification_report,confusion_matrix
+pipe.score(X_test, y_test)
+
+
+
+
+from sklearn.naive_bayes import MultinomialNB

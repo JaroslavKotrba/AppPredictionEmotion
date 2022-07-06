@@ -59,7 +59,7 @@ pipe.fit(X_train, y_train)
 from sklearn.metrics import accuracy_score,classification_report,confusion_matrix
 pipe.score(X_test, y_test)
 
-
+pipe
 
 
 from sklearn.naive_bayes import MultinomialNB

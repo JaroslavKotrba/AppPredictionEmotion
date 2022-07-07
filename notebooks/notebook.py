@@ -65,6 +65,10 @@ pipe.predict([example])
 pipe.predict_proba([example])
 pipe.classes_
 
+# Saving the model
+
+
+
 
 
 

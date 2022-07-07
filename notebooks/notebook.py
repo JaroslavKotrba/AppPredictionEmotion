@@ -3,8 +3,6 @@
 # conda activate enviro
 # cd "/Users/hp/OneDrive/Documents/Python Anaconda/Streamlit_NLP_App/AppPredictionEmotion"
 
-from multiprocessing import Pipe
-from xml.etree.ElementTree import PI
 import numpy as np
 import pandas as pd
 pd.set_option('display.max_rows', 500)
@@ -19,7 +17,9 @@ os.chdir(path)
 os.listdir()
 
 # Load
-df = pd.read_csv("data/emotion_dataset.csv"); df
+df = pd.read_csv("data/emotion_dataset_raw.csv"); df
+
+df = df[['Text', 'Emotion']]
 
 # Value counts
 df['Emotion'].value_counts()
@@ -58,6 +58,14 @@ pipe.fit(X_train, y_train)
 # Accuracy
 from sklearn.metrics import accuracy_score,classification_report,confusion_matrix
 pipe.score(X_test, y_test)
+
+# Example
+example = "This book was interesting it made me happy!"
+pipe.predict([example])
+pipe.predict_proba([example])
+pipe.classes_
+
+
 
 
 

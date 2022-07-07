@@ -5,6 +5,7 @@
 
 import numpy as np
 import pandas as pd
+from sklearn import pipeline
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 100)
 import matplotlib.pyplot as plt
@@ -49,7 +50,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 from sklearn.pipeline import Pipeline
 
 # Model
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer # matrix of word counts
 from sklearn.linear_model import LogisticRegression
 
 pipe = Pipeline(steps=[('cv', CountVectorizer()), ('lr', LogisticRegression())])
@@ -66,8 +67,10 @@ pipe.predict_proba([example])
 pipe.classes_
 
 # Saving the model
-
-
+import joblib
+saved_pipeline = open("models/saved_pipeline.pkl", "wb")
+joblib.dump(pipe, saved_pipeline)
+saved_pipeline.close()
 
 
 

@@ -76,5 +76,5 @@ saved_pipeline.close()
 
 
 
-
+# Another option
 from sklearn.naive_bayes import MultinomialNB

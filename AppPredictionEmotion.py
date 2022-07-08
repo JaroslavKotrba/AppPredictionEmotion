@@ -5,14 +5,17 @@
 # streamlit run AppPredictionEmotion.py
 
 import streamlit as st
-import pandas as pd
 import numpy as np
-import pickle
+import pandas as pd
+from sklearn import pipeline
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 100)
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # other libraries
 from PIL import Image
-import requests
-from plotly import graph_objs as go
+import joblib
 
 pipe = open('models/saved_pipeline.pkl', 'rb')
 rf = pickle.load(pipe)
@@ -27,9 +30,14 @@ def main():
 
     st.sidebar.title("NAVIGATION")
 
-    menu = ["Home", "Visualisation", "Model described", "About"]
+    menu = ["Home", "Monitor", "About"]
     
-    choice = st.sidebar.radio("Please select a page:", menu)
+    choice = st.sidebar.radio("Menu", menu)
+
+    if choice == "Home":
+        st.subheader("Home Emotion")
+    
+
     
     st.sidebar.markdown("""---""")
 

@@ -46,7 +46,7 @@ def main():
             raw_text = st.text_area("Type here:")
             submit_text = st.form_submit_button(label="Submit")
 
-    if raw_text=="":
+    if (submit_text and raw_text==""):
         st.warning("Please fill the form!")
     else: 
         if submit_text:

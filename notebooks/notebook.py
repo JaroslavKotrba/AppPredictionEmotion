@@ -49,20 +49,46 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 # Build pipeline
 from sklearn.pipeline import Pipeline
 
-# Model
+# Models
 from sklearn.feature_extraction.text import CountVectorizer # matrix of word counts
+
+# Naive Bayes classifier
+from sklearn.naive_bayes import MultinomialNB
+
+pipe = Pipeline(steps=[('cv', CountVectorizer()), ('lr', MultinomialNB())])
+pipe.fit(X_train, y_train)
+
+y_pred = pipe.predict(X_test)
+
+# Accuracy Naive Bayes
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+
+pipe.score(X_test, y_test)
+
+print('Confusion metrix: ', '\n', confusion_matrix(y_test, y_pred))
+print('Accuracy: ', round(accuracy_score(y_test, y_pred)*100, 2),'%')
+print('Report: ', '\n', classification_report(y_test, y_pred))
+
+# Logistic regression
 from sklearn.linear_model import LogisticRegression
 
 pipe = Pipeline(steps=[('cv', CountVectorizer()), ('lr', LogisticRegression())])
 pipe.fit(X_train, y_train)
 
-# Accuracy
-from sklearn.metrics import accuracy_score,classification_report,confusion_matrix
+y_pred = pipe.predict(X_test)
+
+# Accuracy Logistic regression
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+
 pipe.score(X_test, y_test)
+
+print('Confusion metrix: ', '\n', confusion_matrix(y_test, y_pred))
+print('Accuracy: ', round(accuracy_score(y_test, y_pred)*100, 2),'%')
+print('Report: ', '\n', classification_report(y_test, y_pred))
 
 # Example
 example = "This book was interesting it made me happy!"
-pipe.predict([example])
+pipe.predict([example])[0]
 pipe.predict_proba([example])
 pipe.classes_
 
@@ -75,5 +101,3 @@ saved_pipeline.close()
 
 
 
-# Another option
-from sklearn.naive_bayes import MultinomialNB

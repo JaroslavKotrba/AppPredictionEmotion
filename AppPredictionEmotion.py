@@ -7,6 +7,9 @@
 # Track Utils
 from track_utils import create_page_visited_table, add_page_visited_details, view_all_page_visited_details, add_prediction_details, view_all_prediction_details, create_emotionclf_table
 
+create_page_visited_table()
+create_emotionclf_table()
+
 # Streamlit
 import streamlit as st
 import altair as alt
@@ -47,6 +50,9 @@ def main():
 
     if choice == "Home":
         st.subheader("Emotion in Text")
+
+        add_page_visited_details("Home",datetime.now())
+
         with st.form(key='emotion_clf_form', clear_on_submit=True):
                 raw_text = st.text_area("Type here:")
                 submit_text = st.form_submit_button(label="Submit")
@@ -83,20 +89,19 @@ def main():
 
     elif choice == "Monitor":
         st.subheader("Monitor App")
+
         add_page_visited_details("Monitor",datetime.now())
 
-        with st.beta_expander("Page Metrics"):
+        with st.expander("Page Metrics"):
             page_visited_details = pd.DataFrame(view_all_page_visited_details(),columns=['Pagename','Time_of_Visit'])
             st.dataframe(page_visited_details)	
 
             pg_count = page_visited_details['Pagename'].value_counts().rename_axis('Pagename').reset_index(name='Counts')
-            c = alt.Chart(pg_count).mark_bar().encode(x='Pagename',y='Counts',color='Pagename')
+            c = alt.Chart(pg_count).mark_bar().encode(x='Pagename', y='Counts', color='Pagename')
             st.altair_chart(c,use_container_width=True)	
 
             p = px.pie(pg_count,values='Counts',names='Pagename')
-            st.plotly_chart(p,use_container_width=True)
-
-
+            st.plotly_chart(p, use_container_width=True)
 
 
 
@@ -105,13 +110,13 @@ def main():
     elif choice == "About":
         st.subheader("About")
 
+        add_page_visited_details("About",datetime.now())
 
 
 
 
 
 
-            
     st.sidebar.markdown("""---""")
 
     st.sidebar.subheader("More info:"); 

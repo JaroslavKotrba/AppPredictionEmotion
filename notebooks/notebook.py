@@ -52,7 +52,7 @@ from sklearn.pipeline import Pipeline
 # Models
 from sklearn.feature_extraction.text import CountVectorizer # matrix of word counts
 
-# Naive Bayes classifier
+# Naive Bayes Classifier
 from sklearn.naive_bayes import MultinomialNB
 
 pipe = Pipeline(steps=[('cv', CountVectorizer()), ('lr', MultinomialNB())])
@@ -60,7 +60,7 @@ pipe.fit(X_train, y_train)
 
 y_pred = pipe.predict(X_test)
 
-# Accuracy Naive Bayes
+# Accuracy Naive Bayes Classifier
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 
 pipe.score(X_test, y_test)
@@ -69,7 +69,7 @@ print('Confusion metrix: ', '\n', confusion_matrix(y_test, y_pred))
 print('Accuracy: ', round(accuracy_score(y_test, y_pred)*100, 2),'%')
 print('Report: ', '\n', classification_report(y_test, y_pred))
 
-# Logistic regression
+# Logistic Regression
 from sklearn.linear_model import LogisticRegression
 
 pipe = Pipeline(steps=[('cv', CountVectorizer()), ('lr', LogisticRegression())])
@@ -77,7 +77,7 @@ pipe.fit(X_train, y_train)
 
 y_pred = pipe.predict(X_test)
 
-# Accuracy Logistic regression
+# Accuracy Logistic Regression
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 
 pipe.score(X_test, y_test)

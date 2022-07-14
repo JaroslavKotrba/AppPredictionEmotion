@@ -7,7 +7,10 @@
 # Track Utils
 from track_utils import create_page_visited_table, add_page_visited_details, view_all_page_visited_details, add_prediction_details, view_all_prediction_details, create_emotionclf_table
 
+# Table 1
 create_page_visited_table()
+
+# Table 2
 create_emotionclf_table()
 
 # Streamlit
@@ -67,6 +70,8 @@ def main():
                 prediction = predict_emotion(raw_text)
                 probability = predict_emotions_proba(raw_text)
 
+                add_prediction_details(raw_text, prediction, np.max(probability), datetime.now())
+
                 # Left side
                 with left_column:
                     st.success("Original Text")
@@ -103,19 +108,62 @@ def main():
             p = px.pie(pg_count,values='Counts',names='Pagename')
             st.plotly_chart(p, use_container_width=True)
 
+        with st.expander('Emotion Classifier Metrics'):
+            df_emotions = pd.DataFrame(view_all_prediction_details(),columns=['Rawtext','Prediction','Probability','Time_of_Visit'])
+            st.dataframe(df_emotions)
 
-
-
+            prediction_count = df_emotions['Prediction'].value_counts().rename_axis('Prediction').reset_index(name='Counts')
+            pc = alt.Chart(prediction_count).mark_bar().encode(x='Prediction',y='Counts',color='Prediction')
+            st.altair_chart(pc,use_container_width=True)
 
     elif choice == "About":
-        st.subheader("About")
+        st.subheader("About App")
 
         add_page_visited_details("About",datetime.now())
 
+        st.write("I created this app to be able to predict emotions in the given text. The main purpose is to evaluate long emails from my boss :)")
 
+        st.markdown("""---""")
 
+        # CONTACT
+        # Use local CSS
+        def local_css(file_name):
+            with open(file_name) as f:
+                st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+        local_css("style.css")
 
+        left_column, right_column = st.columns(2)
+        with left_column:
+            st.write("##")
+            import requests
+            from streamlit_lottie import st_lottie
+
+            def load_lottieurl(url):
+                r = requests.get(url)
+                if r.status_code != 200:
+                    return None
+                return r.json()
+                
+            lottie_coding = load_lottieurl("https://assets7.lottiefiles.com/packages/lf20_naj9ijgt.json")
+
+            st_lottie(lottie_coding, height=300, key="coding")
+            
+        with right_column:
+            with st.container():
+                st.header("Contact me: ")
+                st.write("##")
+                # Documention: https://formsubmit.co/
+                contact_form = """
+                <form action="https://formsubmit.co/jaroslav.kotrba@gmail.com" method="POST">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="email" name="email" placeholder="Your email" required>
+                    <textarea name="message" placeholder="Your message here" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+                """
+            st.markdown(contact_form, unsafe_allow_html=True)
 
     st.sidebar.markdown("""---""")
 

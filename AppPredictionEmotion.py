@@ -1,5 +1,6 @@
 # STREAMLIT
 
+# deploy to Heroku - via GitHub
 # conda activate enviro
 # cd "/Users/hp/OneDrive/Documents/Python Anaconda/Streamlit_NLP_App/AppPredictionEmotion"
 # streamlit run AppPredictionEmotion.py

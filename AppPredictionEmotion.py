@@ -6,13 +6,13 @@
 # streamlit run AppPredictionEmotion.py
 
 # Track Utils
-from track_utils import create_page_visited_table, add_page_visited_details, view_all_page_visited_details, add_prediction_details, view_all_prediction_details, create_emotionclf_table
+# from track_utils import create_page_visited_table, add_page_visited_details, view_all_page_visited_details, add_prediction_details, view_all_prediction_details, create_emotionclf_table
 
-# Table 1
-create_page_visited_table()
+# # Table 1
+# create_page_visited_table()
 
-# Table 2
-create_emotionclf_table()
+# # Table 2
+# create_emotionclf_table()
 
 # Streamlit
 import streamlit as st
@@ -48,14 +48,14 @@ def main():
 
     st.sidebar.title("NAVIGATION")
 
-    menu = ["Home", "Monitor", "About"]
+    menu = ["Home", "About"] #  "Monitor"
     
     choice = st.sidebar.selectbox("Menu", menu)
 
     if choice == "Home":
         st.subheader("Emotion in Text")
 
-        add_page_visited_details("Home",datetime.now())
+        # add_page_visited_details("Home",datetime.now())
 
         with st.form(key='emotion_clf_form', clear_on_submit=True):
                 raw_text = st.text_area("Type here:")
@@ -71,7 +71,7 @@ def main():
                 prediction = predict_emotion(raw_text)
                 probability = predict_emotions_proba(raw_text)
 
-                add_prediction_details(raw_text, prediction, np.max(probability), datetime.now())
+                # add_prediction_details(raw_text, prediction, np.max(probability), datetime.now())
 
                 # Left side
                 with left_column:
@@ -93,34 +93,34 @@ def main():
                     fig = alt.Chart(proba_df_clean).mark_bar().encode(x='emotions', y='probability', color='emotions')
                     st.altair_chart(fig, use_container_width=True)
 
-    elif choice == "Monitor":
-        st.subheader("Monitor App")
+    # elif choice == "Monitor":
+    #     st.subheader("Monitor App")
 
-        add_page_visited_details("Monitor",datetime.now())
+    #     add_page_visited_details("Monitor",datetime.now())
 
-        with st.expander("Page Metrics"):
-            page_visited_details = pd.DataFrame(view_all_page_visited_details(),columns=['Pagename','Time_of_Visit'])
-            st.dataframe(page_visited_details)	
+    #     with st.expander("Page Metrics"):
+    #         page_visited_details = pd.DataFrame(view_all_page_visited_details(),columns=['Pagename','Time_of_Visit'])
+    #         st.dataframe(page_visited_details)	
 
-            pg_count = page_visited_details['Pagename'].value_counts().rename_axis('Pagename').reset_index(name='Counts')
-            c = alt.Chart(pg_count).mark_bar().encode(x='Pagename', y='Counts', color='Pagename')
-            st.altair_chart(c,use_container_width=True)	
+    #         pg_count = page_visited_details['Pagename'].value_counts().rename_axis('Pagename').reset_index(name='Counts')
+    #         c = alt.Chart(pg_count).mark_bar().encode(x='Pagename', y='Counts', color='Pagename')
+    #         st.altair_chart(c,use_container_width=True)	
 
-            p = px.pie(pg_count,values='Counts',names='Pagename')
-            st.plotly_chart(p, use_container_width=True)
+    #         p = px.pie(pg_count,values='Counts',names='Pagename')
+    #         st.plotly_chart(p, use_container_width=True)
 
-        with st.expander('Emotion Classifier Metrics'):
-            df_emotions = pd.DataFrame(view_all_prediction_details(),columns=['Rawtext','Prediction','Probability','Time_of_Visit'])
-            st.dataframe(df_emotions)
+    #     with st.expander('Emotion Classifier Metrics'):
+    #         df_emotions = pd.DataFrame(view_all_prediction_details(),columns=['Rawtext','Prediction','Probability','Time_of_Visit'])
+    #         st.dataframe(df_emotions)
 
-            prediction_count = df_emotions['Prediction'].value_counts().rename_axis('Prediction').reset_index(name='Counts')
-            pc = alt.Chart(prediction_count).mark_bar().encode(x='Prediction',y='Counts',color='Prediction')
-            st.altair_chart(pc,use_container_width=True)
+    #         prediction_count = df_emotions['Prediction'].value_counts().rename_axis('Prediction').reset_index(name='Counts')
+    #         pc = alt.Chart(prediction_count).mark_bar().encode(x='Prediction',y='Counts',color='Prediction')
+    #         st.altair_chart(pc,use_container_width=True)
 
     elif choice == "About":
         st.subheader("About App")
 
-        add_page_visited_details("About",datetime.now())
+        # add_page_visited_details("About",datetime.now())
 
         st.write("I created this app to be able to predict emotions in the given text. The main purpose is to evaluate long emails from my boss :)")
 

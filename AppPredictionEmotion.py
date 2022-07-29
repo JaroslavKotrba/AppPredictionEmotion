@@ -1,4 +1,4 @@
-# STREAMLIT t
+# STREAMLIT
 
 # deploy to Heroku - via GitHub
 # conda activate enviro

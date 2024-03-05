@@ -1,7 +1,6 @@
 # STREAMLIT
 
 # conda activate enviro
-# cd "/Users/hp/OneDrive/Documents/Python Anaconda/Streamlit_NLP_App/AppPredictionEmotion"
 
 import numpy as np
 import pandas as pd
@@ -13,7 +12,7 @@ import seaborn as sns
 
 import os
 os. getcwd()
-path = "/Users/HP/OneDrive/Documents/Python Anaconda/Streamlit_NLP_App/AppPredictionEmotion"
+path = "/Users/HP/Dropbox/Documents/Python/AppPredictionEmotion"
 os.chdir(path)
 os.listdir()
 
